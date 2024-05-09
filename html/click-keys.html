@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Actions Activity One</title>
+</head>
+<body>
+    <h1>click the keys as they appear to make the progress bar increase. An alert with a success message will appear when the activity is complete</h1>
+    <progress id="progress" max="100" value="0"></progress>    
+    <p id="characterIndicator"></p>
+</body>
+<script>
+    const characterMapper = {
+        "a":"KeyA",
+        "b":"KeyB",
+        "c":"KeyC",
+        "d":"KeyD",
+        "left arrow":"ArrowLeft",
+        "right arrow":"ArrowRight",
+        "up arrow":"ArrowUp",
+        "down arrow":"ArrowDown"
+    }
+    const indicator = document.getElementById("characterIndicator");
+    const progressBar = document.getElementById("progress");
+    indicator.textContent = Object.keys(characterMapper)[Math.floor(Math.random()*Object.keys(characterMapper).length)];
+    console.log();
+
+    function change(){
+        progressBar.value += 10;
+        progressBar.value === 100 ? alert("finished!") : indicator.textContent = Object.keys(characterMapper)[Math.floor(Math.random()*Object.keys(characterMapper).length)];
+    }
+
+    window.addEventListener("keyup", (e)=>{e.code===characterMapper[indicator.textContent] ? change() : null})
+
+</script>
+</html>

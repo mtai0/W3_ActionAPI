@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Element in View</title>
+</head>
+<body>
+    <h1>Scroll the web page down until text appears: the web element holding the text will be hidden until you scroll to it</h1>
+</body>
+<script>
+    const title = document.getElementById("a");
+    function addSize(){
+        for(let x = 0; x <= 200; x++){
+            let e = document.createElement("br");
+            document.body.append(e);
+        }  
+        let p = document.createElement("p");
+        p.hidden = true;
+        document.body.append(p);      
+    }
+
+    for(x = 0; x < 4; x++){
+        addSize();
+    }
+
+    const paragraph = document.getElementsByTagName("p")[Math.floor(Math.random()*document.getElementsByTagName("p").length)];
+    paragraph.textContent = "Now you see me"
+    window.addEventListener("scroll",()=>{isInViewport(paragraph) ? paragraph.hidden = false : paragraph.hidden = true
+});
+
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+</script>
+</html>

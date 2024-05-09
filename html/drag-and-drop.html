@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Drag and Drop</title>
+    <style>
+        div {
+            border: 5pt solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click and drag the text below into the red box</h1>
+    <p draggable="true" ondragstart="drag(event)" id = "toDrag">Drag this text into the box below</p>
+    <br>
+    <br>
+    <br>
+    <div ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</body>
+<script>
+    function allowDrop(ev) {
+    ev.preventDefault();
+    }
+
+    function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+</html>
